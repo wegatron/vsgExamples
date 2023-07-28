@@ -1,0 +1,36 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d225f33..97f6f84 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -11,6 +11,8 @@ SET(VSGEXAMPLES_RELEASE_CANDIDATE 0)
+ # build all examples into the bin directory
+ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
+ 
++list(APPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_SOURCE_DIR}/install/lib/cmake/assimp-5.2)
++
+ # Change the default build type to Release
+ if(NOT CMAKE_BUILD_TYPE)
+     set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel." FORCE)
+@@ -21,16 +23,19 @@ if (VULKAN_SDK)
+     set(ENV{VULKAN_SDK} ${VULKAN_SDK})
+ endif()
+ 
+-find_package(vsg 1.0.8)
++#find_package(vsg 1.0.8)
++add_subdirectory(VulkanSceneGraph)
+ 
+ vsg_setup_dir_vars()
+ vsg_setup_build_vars()
+ 
+ # find the optional vsgExamples that can be used for reading and range of image and 3d model formats and shader compilation
+-find_package(vsgXchange 1.0.2 QUIET)
++#find_package(vsgXchange 1.0.2 QUIET)
++add_subdirectory(vsgXchange)
+ 
+ # find the optional vsgImGui that can be used for GUI elements added into graphics window.
+-find_package(vsgImGui QUIET)
++#find_package(vsgImGui QUIET)
++add_subdirectory(vsgImGui)
+ 
+ # set the use of C++17 globally as all examples require it
+ set(CMAKE_CXX_STANDARD 17)
